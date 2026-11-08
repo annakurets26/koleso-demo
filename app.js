@@ -375,7 +375,20 @@
     openLink('https://t.me/share/url?url=' + encodeURIComponent(l.share) + '&text=' + encodeURIComponent(text));
   }
 
+  function sparks() {
+    if (!cfg.anim || !cfg.anim.sparks || reduceMq.matches) return;
+    var box = $('#wheelMain'), n8 = 10;
+    for (var i = 0; i < n8; i++) {
+      var ang = i * 360 / n8 + 18, p = pt(ang, 58), s = document.createElement('i');
+      s.className = 'spark';
+      s.style.cssText = 'left:' + f(50 + p[0] * 0.86) + '%;top:' + f(50 + p[1] * 0.86) + '%;animation-delay:' + f(i * 0.35) + 's;width:' + (i % 2 ? 12 : 18) + 'px;height:' + (i % 2 ? 12 : 18) + 'px';
+      s.innerHTML = '<svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 1c.9 6.2 4.8 10.1 11 11-6.2.9-10.1 4.8-11 11-.9-6.2-4.8-10.1-11-11C7.200 11.100 11.100 7.200 12 1z"/></svg>';
+      box.appendChild(s);
+    }
+  }
+
   function ambient() {
+    sparks();
     if (!cfg.anim || cfg.anim.ambient !== 'hearts' || reduceMq.matches) return;
     var bg = $('.bg'), cols = cfg.wheel.sectorFill;
     for (var i = 0; i < 14; i++) {
