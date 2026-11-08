@@ -17,7 +17,7 @@
 
   function loadConfig() {
     if (location.protocol === 'file:' && window.KOLESO_CONFIG) return Promise.resolve(window.KOLESO_CONFIG);
-    return fetch('config.json?v=3', { cache: 'no-cache' }).then(function (r) {
+    return fetch('config.json?v=4', { cache: 'no-cache' }).then(function (r) {
       if (!r.ok) throw new Error('config');
       return r.json();
     }).catch(function (e) {
@@ -167,7 +167,7 @@
     spinning = false; lastResult = k;
     document.body.classList.remove('is-spinning');
     $('#spinBtn').disabled = false;
-    kick(true); haptic('done');
+    kick(true); haptic('done'); bumpCounter();
     var s = cfg.sectors[k];
     var txt = s.texts[rint(s.texts.length)];
     $('#cardIcon').innerHTML = iconSvg(s.icon, 'ic ic-big');
@@ -188,6 +188,25 @@
       if (tg && tg.openLink) { tg.openLink(url); return; }
     } catch (e) {}
     window.open(url, '_blank', 'noopener');
+  }
+
+  function contactUrl() {
+    var l = cfg.links, u = l.contact;
+    if (l.contactPrefill && lastResult !== null) {
+      var t = l.contactPrefill.replace('{sector}', cfg.sectors[lastResult].title);
+      u += (u.indexOf('?') === -1 ? '?' : '&') + 'text=' + encodeURIComponent(t);
+    }
+    return u;
+  }
+
+  function bumpCounter() {
+    var el = $('#counter'), day = new Date().toISOString().slice(0, 10), n = 0;
+    try {
+      var d = JSON.parse(localStorage.getItem('koleso_count') || '{}');
+      n = d.day === day ? d.n : 0; n += 1;
+      localStorage.setItem('koleso_count', JSON.stringify({ day: day, n: n }));
+    } catch (e) { n = (bumpCounter.mem = (bumpCounter.mem || 0) + 1); }
+    el.textContent = (cfg.counterText || '').replace('{n}', n);
   }
 
   function share() {
@@ -222,7 +241,7 @@
     $('#spinBtn').addEventListener('click', spin);
     $('#againBtn').addEventListener('click', function () { closeCard(); spin(); });
     $('#shareBtn').addEventListener('click', share);
-    $('#contactBtn').addEventListener('click', function () { openLink(cfg.links.contact); });
+    $('#contactBtn').addEventListener('click', function () { openLink(contactUrl()); });
     $('#sheetBg').addEventListener('click', closeCard);
     addEventListener('keydown', function (e) { if (e.key === 'Escape') closeCard(); });
     if (tg) { try { tg.ready(); tg.expand(); tg.setHeaderColor(cfg.colors.bg); tg.setBackgroundColor(cfg.colors.bg); } catch (e) {} }
