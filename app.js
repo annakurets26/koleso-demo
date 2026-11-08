@@ -188,6 +188,7 @@
     $('#cardText').textContent = txt;
     var act = s.action || { label: cfg.againLabel, type: 'spin' };
     var ab = $('#actionBtn'); ab.textContent = act.label; ab.dataset.type = act.type; ab.dataset.url = act.url || '';
+    $('#againBtn').hidden = act.type === 'spin';
     var card = $('#sheet'); card.hidden = false; void card.offsetWidth; card.classList.add('open');
     if (!reduceMq.matches) burst(); else { /* без эффектов */ }
     setTimeout(function () { $('#actionBtn').focus({ preventScroll: true }); }, 50);
@@ -399,6 +400,8 @@
     $('#againBtn').textContent = cfg.againLabel;
     $('#shareBtn').textContent = cfg.shareLabel;
     $('#contactBtn').textContent = cfg.contactLabel;
+    if (!cfg.links.contact) $('#contactBtn').hidden = true;
+    if (!cfg.links.contact) $('#contactBtn').hidden = true;
     $('#demoNote').textContent = cfg.demoNote;
     buildWheelInto($('#wheelMain'));
     buildWheelInto($('#wheelSplash'));
