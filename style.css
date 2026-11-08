@@ -66,79 +66,126 @@ button:disabled{cursor:default}
 @media (max-height:640px){.wheel-box{width:min(80vw,58dvh)}.splash .wheel-box{width:min(50vw,170px)}}
 /* E: Лаванда */
 .v-lav{background:var(--bg)}
-.v-lav .bg{background:radial-gradient(circle at 10% 6%,rgba(185,169,227,.5),transparent 40%),radial-gradient(circle at 94% 92%,rgba(232,196,176,.45),transparent 42%)}
+.v-lav .bg{background:radial-gradient(circle at 10% 6%,rgba(196,118,138,.5),transparent 40%),radial-gradient(circle at 94% 92%,rgba(232,207,160,.45),transparent 42%)}
 .v-lav .head h1{font-weight:700;font-size:18px;color:var(--text)}
 .v-lav .splash{background:var(--bg)}
 .v-lav .splash h1{font-weight:700;letter-spacing:-.01em}
 .v-lav .splash p.sub{color:var(--muted)}
 .v-lav .kicker{font-weight:700;color:var(--accent2);letter-spacing:.24em}
-.v-lav .rim{fill:#ddd3f5;stroke:#8c7bc4;stroke-width:.7}
-.v-lav .rim-in{fill:none;stroke:#8c7bc4;stroke-width:.9}
-.v-lav .hub{fill:#fff;stroke:#4b3f72;stroke-width:2}
+.v-lav .rim{fill:#f3e1e0;stroke:#a04a62;stroke-width:.7}
+.v-lav .rim-in{fill:none;stroke:#a04a62;stroke-width:.9}
+.v-lav .hub{fill:#fff;stroke:#6b2336;stroke-width:2}
 .v-lav .hub-in{display:none}
 .v-lav{--sec-sw:1.2}
-.v-lav .w-fix{filter:drop-shadow(0 6px 12px rgba(75,63,114,.25))}
-.v-lav .pointer svg{filter:drop-shadow(0 2px 3px rgba(46,42,69,.35))}
-.v-lav .btn-main,.v-lav .btn-primary{font-weight:700;background:#4b3f72;color:#fff;border-radius:14px;box-shadow:0 6px 16px rgba(75,63,114,.3)}
-.v-lav .btn-main:disabled{background:#7d7598}
-.v-lav .btn-sec{font-weight:700;border:1.5px solid #4b3f72;color:#4b3f72;border-radius:14px}
+.v-lav .w-fix{filter:drop-shadow(0 6px 12px rgba(107,35,54,.25))}
+.v-lav .pointer svg{filter:drop-shadow(0 2px 3px rgba(58,31,39,.35))}
+.v-lav .btn-main,.v-lav .btn-primary{font-weight:700;background:#6b2336;color:#fff;border-radius:14px;box-shadow:0 6px 16px rgba(107,35,54,.3)}
+.v-lav .btn-main:disabled{background:#9a7478}
+.v-lav .btn-sec{font-weight:700;border:1.5px solid #6b2336;color:#6b2336;border-radius:14px}
 .v-lav .note{color:var(--muted)}
-.v-lav .card{--card-text:var(--text);background:#fff;border-radius:26px 26px 0 0;box-shadow:0 -10px 40px rgba(75,63,114,.22)}
-.v-lav .card-ic{border-radius:50%;background:#e3dcf5;color:#4b3f72;border:4px solid #fff}
+.v-lav .card{--card-text:var(--text);background:#fff;border-radius:26px 26px 0 0;box-shadow:0 -10px 40px rgba(107,35,54,.22)}
+.v-lav .card-ic{border-radius:50%;background:#f0dad6;color:#6b2336;border:4px solid #fff}
 .v-lav .ic-big{fill:rgba(255,255,255,.65);stroke-width:1.5}
-.v-lav .card h2{font-weight:700;font-size:26px;color:#2e2a45}
+.v-lav .card h2{font-weight:700;font-size:26px;color:#3a1f27}
 .v-lav .flash{display:none}
 
 .v-lav{font-weight:500}
 .v-lav .splash p.sub,.v-lav .note{font-weight:500}
-.v-lav .card p{font-size:16px;font-weight:500;color:#2e2a45}
+.v-lav .card p{font-size:16px;font-weight:500;color:#3a1f27}
 .v-lav .splash p.sub{font-size:16px}
 
 /* названия секторов и подсветка выпавшего */
-.v-lav .lbl{font-weight:700;font-size:6.6px;fill:#2e2a45;letter-spacing:0}
+.v-lav .lbl{font-weight:700;font-size:6.6px;fill:#3a1f27;letter-spacing:0}
 .v-lav .sec{transition:opacity .4s,fill .4s}
 .v-lav .lbl{transition:opacity .4s,fill .4s}
 .v-lav .done .sec:not(.win),.v-lav .done .lbl:not(.win){opacity:.38}
-.v-lav .done .sec.win{fill:#7a68b8;stroke:#4b3f72;stroke-width:1.6}
+.v-lav .done .sec.win{fill:#8c2f4a;stroke:#6b2336;stroke-width:1.6}
 .v-lav .done .lbl.win{fill:#fff}
-.result-name{height:38px;margin-top:6px;font:700 26px/38px var(--font-head);color:#4b3f72;text-align:center;opacity:0}
+.result-name{height:38px;margin-top:6px;font:700 26px/38px var(--font-head);color:#6b2336;text-align:center;opacity:0}
 .result-name.show{animation:nameIn .5s cubic-bezier(.2,1.3,.3,1) forwards}
 @keyframes nameIn{from{opacity:0;transform:translateY(8px) scale(.9)}to{opacity:1;transform:none}}
 
 /* читаемость подписей и кнопка действия */
-.v-lav .lbl{font-size:7.4px;font-weight:700;fill:#1f1b33;stroke:#fff;stroke-width:1.8px;paint-order:stroke;stroke-linejoin:round}
-.v-lav .done .lbl.win{fill:#fff;stroke:#4b3f72}
+.v-lav .lbl{font-size:7.4px;font-weight:700;fill:#2a1218;stroke:#fff;stroke-width:1.8px;paint-order:stroke;stroke-linejoin:round}
+.v-lav .done .lbl.win{fill:#fff;stroke:#6b2336}
 .v-lav .card-row .btn{font-size:13px;padding:11px 4px}
 
 /* экран с полезным */
 .card.panel{text-align:left;max-height:86dvh;overflow:auto;padding-top:22px}
 .card.panel h2{font-size:22px;margin-bottom:6px;text-align:left}
-.p-intro{margin:0 0 14px!important;font-size:14px!important;color:#4f4a6a!important;max-width:none!important}
+.p-intro{margin:0 0 14px!important;font-size:14px!important;color:#6a4249!important;max-width:none!important}
 .card.panel .card-btns{margin-top:16px}
-.p-check{display:flex;gap:12px;align-items:flex-start;width:100%;text-align:left;padding:11px 12px;margin-bottom:8px;border:1.5px solid #cdbfee;border-radius:12px;background:#faf8fe;color:#2e2a45;font-size:15px;line-height:1.4;font-weight:500}
-.p-box{flex:none;width:22px;height:22px;border:2px solid #4b3f72;border-radius:6px;background:#fff;display:grid;place-items:center;margin-top:1px}
-.p-check.on{background:#ece6fa;border-color:#8c7bc4}
-.p-check.on .p-box{background:#4b3f72}
+.p-check{display:flex;gap:12px;align-items:flex-start;width:100%;text-align:left;padding:11px 12px;margin-bottom:8px;border:1.5px solid #e6bcb6;border-radius:12px;background:#fffaf6;color:#3a1f27;font-size:15px;line-height:1.4;font-weight:500}
+.p-box{flex:none;width:22px;height:22px;border:2px solid #6b2336;border-radius:6px;background:#fff;display:grid;place-items:center;margin-top:1px}
+.p-check.on{background:#f6e6e0;border-color:#a04a62}
+.p-check.on .p-box{background:#6b2336}
 .p-check.on .p-box::after{content:"";width:6px;height:11px;border:solid #fff;border-width:0 2.5px 2.5px 0;transform:rotate(45deg) translate(-1px,-1px)}
-.p-prog{margin:6px 0 4px!important;font-size:13px!important;font-weight:700;color:#8c7bc4!important;max-width:none!important}
-.p-note{margin:10px 0 0!important;font-size:14px!important;color:#2e2a45!important;max-width:none!important}
-.p-item{display:flex;flex-direction:column;gap:2px;padding:11px 12px;margin-bottom:8px;border-radius:12px;background:#f3effb;font-size:15px;line-height:1.4;color:#2e2a45}
+.p-prog{margin:6px 0 4px!important;font-size:13px!important;font-weight:700;color:#a04a62!important;max-width:none!important}
+.p-note{margin:10px 0 0!important;font-size:14px!important;color:#3a1f27!important;max-width:none!important}
+.p-item{display:flex;flex-direction:column;gap:2px;padding:11px 12px;margin-bottom:8px;border-radius:12px;background:#f9ece6;font-size:15px;line-height:1.4;color:#3a1f27}
 .p-item strong{font-weight:700}
-.p-steps{margin:0 0 12px;padding-left:22px;font-size:15px;line-height:1.5;color:#2e2a45}
-.p-timer{font:700 40px/1.2 var(--font-head);color:#4b3f72;text-align:center;margin:6px 0 10px}
+.p-steps{margin:0 0 12px;padding-left:22px;font-size:15px;line-height:1.5;color:#3a1f27}
+.p-timer{font:700 40px/1.2 var(--font-head);color:#6b2336;text-align:center;margin:6px 0 10px}
 .p-start{width:100%;padding:12px}
 .p-q{margin:2px 0 10px!important;font-size:16px!important;font-weight:700;max-width:none!important}
-.p-opt{display:block;width:100%;text-align:left;padding:12px;margin-bottom:8px;border:1.5px solid #4b3f72;border-radius:12px;background:#fff;color:#2e2a45;font-size:15px;font-weight:500}
+.p-opt{display:block;width:100%;text-align:left;padding:12px;margin-bottom:8px;border:1.5px solid #6b2336;border-radius:12px;background:#fff;color:#3a1f27;font-size:15px;font-weight:500}
 .p-opt.right{background:#dcefe3;border-color:#3f8a5f}
 .p-opt.wrong{background:#f6dcdc;border-color:#b24a4a}
 .p-quiz .btn-sec{width:100%;margin-top:10px;padding:12px}
 
 /* крупные подписи на колесе и игровые экраны */
-.v-lav .lbl{font-size:9px;font-weight:800;fill:#14102a;stroke:#fff;stroke-width:2.4px;paint-order:stroke;stroke-linejoin:round}
-.v-lav .done .lbl.win{fill:#fff;stroke:#2e2556;stroke-width:2.4px}
-.p-big{margin:6px 0 12px;padding:18px 16px;border-radius:16px;background:#ece6fa;color:#2e2a45;font:700 20px/1.35 var(--font-head);text-align:center;min-height:96px;display:grid;place-items:center}
+.v-lav .lbl{font-size:9px;font-weight:800;fill:#2a1218;stroke:#fff;stroke-width:2.4px;paint-order:stroke;stroke-linejoin:round}
+.v-lav .done .lbl.win{fill:#fff;stroke:#4f1a2a;stroke-width:2.4px}
+.p-big{margin:6px 0 12px;padding:18px 16px;border-radius:16px;background:#f6e6e0;color:#3a1f27;font:700 20px/1.35 var(--font-head);text-align:center;min-height:96px;display:grid;place-items:center}
 .p-big.pop{animation:nameIn .45s cubic-bezier(.2,1.3,.3,1)}
 .p-nums{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin:6px 0 12px}
-.p-num{padding:16px 0;border:2px solid #4b3f72;border-radius:14px;background:#fff;color:#2e2a45;font:700 22px var(--font-head)}
+.p-num{padding:16px 0;border:2px solid #6b2336;border-radius:14px;background:#fff;color:#3a1f27;font:700 22px var(--font-head)}
 .p-num.right{background:#dcefe3;border-color:#3f8a5f}
 .p-num.wrong{background:#f6dcdc;border-color:#b24a4a}
+/* дополнительная анимация */
+.bg{overflow:hidden}
+.float{position:absolute;bottom:-40px;opacity:0;animation:floatUp linear infinite}
+.float svg{width:100%;height:100%;display:block}
+@keyframes floatUp{0%{transform:translateY(0) rotate(-8deg);opacity:0}12%{opacity:.4}85%{opacity:.3}100%{transform:translateY(-110vh) rotate(12deg);opacity:0}}
+#wheelMain{animation:bob 4.5s ease-in-out infinite}
+.is-spinning #wheelMain{animation:none}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+.is-spinning .w-fix .rim-in{animation:rimGlow .5s ease-in-out infinite alternate}
+@keyframes rimGlow{from{stroke-width:.9;opacity:.6}to{stroke-width:2.4;opacity:1}}
+.sec.tick{filter:brightness(1.18) saturate(1.2)}
+.btn-main{position:relative;overflow:hidden}
+.btn-main:not(:disabled)::after{content:"";position:absolute;top:0;left:-60%;width:40%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.35),transparent);transform:skewX(-20deg);animation:shine 3.6s ease-in-out infinite}
+@keyframes shine{0%,55%{left:-60%}100%{left:130%}}
+.btn-main:not(:disabled){animation:pulse 2.4s ease-in-out infinite}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.03)}}
+.splash .wheel-box{animation:slow 40s linear infinite,popIn .9s cubic-bezier(.2,1.3,.3,1) both}
+@keyframes popIn{from{scale:.5;opacity:0}to{scale:1;opacity:1}}
+.splash .kicker,.splash h1,.splash p.sub,.splash .btn{animation:fadeUp .7s cubic-bezier(.2,.9,.3,1) both}
+.splash .kicker{animation-delay:.25s}.splash h1{animation-delay:.4s}.splash p.sub{animation-delay:.55s}.splash .btn{animation:fadeUp .7s .7s both,pulse 2.4s 1.6s ease-in-out infinite}
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+.sheet.open .card-ic{animation:icPop .7s .1s cubic-bezier(.2,1.6,.3,1) both}
+@keyframes icPop{from{transform:scale(.2) rotate(-40deg);opacity:0}to{transform:none;opacity:1}}
+.sheet.open .card h2{animation:fadeUp .5s .25s both}
+.sheet.open .card p{animation:fadeUp .5s .35s both}
+.sheet.open .card .card-btns{animation:fadeUp .5s .45s both}
+.p-item,.p-check,.p-opt,.p-num{animation:fadeUp .45s both}
+.p-check:nth-child(2),.p-item:nth-child(2){animation-delay:.06s}.p-check:nth-child(3),.p-item:nth-child(3){animation-delay:.12s}.p-check:nth-child(4),.p-item:nth-child(4){animation-delay:.18s}.p-check:nth-child(5),.p-item:nth-child(5){animation-delay:.24s}.p-check:nth-child(6),.p-item:nth-child(6){animation-delay:.3s}
+.p-num:nth-child(2){animation-delay:.05s}.p-num:nth-child(3){animation-delay:.1s}.p-num:nth-child(4){animation-delay:.15s}.p-num:nth-child(5){animation-delay:.2s}
+.done .sec.win{animation:winPulse .9s ease-in-out 3}
+@keyframes winPulse{0%,100%{filter:brightness(1)}50%{filter:brightness(1.35)}}
+.result-name.show{animation:nameIn .6s cubic-bezier(.2,1.5,.3,1) forwards,nameGlow 1.6s .6s ease-in-out 2}
+@keyframes nameGlow{50%{transform:scale(1.08)}}
+.p-big.pop{animation:nameIn .5s cubic-bezier(.2,1.5,.3,1)}
+/* украшения вокруг колеса */
+#wheelMain::before{content:"";position:absolute;inset:-16px;border:2px dashed var(--accent2);border-radius:50%;opacity:.55;animation:slow 36s linear infinite;pointer-events:none}
+.is-spinning #wheelMain::before{animation-duration:3s;opacity:.9}
+.spark{position:absolute;color:var(--accent2);transform:translate(-50%,-50%);opacity:0;animation:twinkle 2.4s ease-in-out infinite;pointer-events:none;z-index:2}
+.spark svg{width:100%;height:100%;display:block}
+@keyframes twinkle{0%,100%{opacity:0;transform:translate(-50%,-50%) scale(.3) rotate(0)}50%{opacity:1;transform:translate(-50%,-50%) scale(1) rotate(35deg)}}
+.is-spinning .spark{animation-duration:.8s}
+.bulb{fill:var(--accent2);r:1.6}
+.pointer{animation:wiggle 3s ease-in-out infinite}
+@keyframes wiggle{0%,100%{transform:translateX(-50%) rotate(0)}50%{transform:translateX(-50%) rotate(-5deg)}}
+.head h1{animation:fadeUp .7s both,tilt 6s 1s ease-in-out infinite}
+@keyframes tilt{0%,100%{transform:none}50%{transform:translateY(-2px) scale(1.03)}}
+.note{animation:fadeUp .8s .3s both}
