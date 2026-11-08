@@ -91,46 +91,43 @@ window.KOLESO_CONFIG = {
     }
   ],
   "colors": {
-    "bg": "#14072b",
-    "bg2": "#2b0f55",
-    "text": "#fff6ff",
-    "muted": "#c9b5e8",
-    "accent": "#ff3d9a",
-    "accent2": "#19e6d4",
-    "gold": "#ffc83d",
-    "card": "#1d0c3d",
-    "line": "#ff3d9a",
-    "label": "#ffe9fb",
-    "sec-stroke": "#ff3d9a",
-    "scrim": "rgba(8,2,20,.7)"
+    "bg": "#fff3df",
+    "bg2": "#ffe6c2",
+    "text": "#2b2233",
+    "muted": "#6d5f73",
+    "accent": "#ff6b5a",
+    "accent2": "#5fd6b0",
+    "gold": "#ffc533",
+    "card": "#ffffff",
+    "line": "#2b2233",
+    "label": "#2b2233",
+    "sec-stroke": "#2b2233",
+    "scrim": "rgba(43,34,51,.45)",
+    "ink": "#2b2233"
   },
   "wheel": {
     "sectorFill": [
-      "#2a1055",
-      "#1a0a3a"
+      "#ff6b5a",
+      "#ffc533",
+      "#5fd6b0",
+      "#fff8ea"
     ],
     "iconColors": [
-      "#ff3d9a",
-      "#19e6d4",
-      "#ffc83d",
-      "#19e6d4",
-      "#ff3d9a",
-      "#ffc83d",
-      "#19e6d4",
-      "#ff3d9a"
+      "#2b2233"
     ],
-    "glow": true,
+    "glow": false,
     "bulbs": 24
   },
   "effect": {
-    "type": "both",
+    "type": "confetti",
     "colors": [
-      "#ff3d9a",
-      "#19e6d4",
-      "#ffc83d",
+      "#ff6b5a",
+      "#ffc533",
+      "#5fd6b0",
+      "#2b2233",
       "#ffffff"
     ],
-    "shape": "circle"
+    "shape": "rect"
   },
   "kicker": "Демо"
 };

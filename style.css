@@ -1,12 +1,16 @@
-@font-face{font-family:'Unbounded';font-style:normal;font-weight:500;font-display:swap;src:url(fonts/unbounded-cyrillic-500-normal.woff2) format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
-@font-face{font-family:'Unbounded';font-style:normal;font-weight:500;font-display:swap;src:url(fonts/unbounded-latin-500-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
-@font-face{font-family:'Unbounded';font-style:normal;font-weight:700;font-display:swap;src:url(fonts/unbounded-cyrillic-700-normal.woff2) format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
-@font-face{font-family:'Unbounded';font-style:normal;font-weight:700;font-display:swap;src:url(fonts/unbounded-latin-700-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
-@font-face{font-family:'Manrope';font-style:normal;font-weight:500;font-display:swap;src:url(fonts/manrope-cyrillic-500-normal.woff2) format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
-@font-face{font-family:'Manrope';font-style:normal;font-weight:500;font-display:swap;src:url(fonts/manrope-latin-500-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
-@font-face{font-family:'Manrope';font-style:normal;font-weight:700;font-display:swap;src:url(fonts/manrope-cyrillic-700-normal.woff2) format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
-@font-face{font-family:'Manrope';font-style:normal;font-weight:700;font-display:swap;src:url(fonts/manrope-latin-700-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
-:root{--font-head:'Unbounded',system-ui,sans-serif;--font-body:'Manrope',system-ui,sans-serif}
+@font-face{font-family:'Rubik';font-style:normal;font-weight:500;font-display:swap;src:url(fonts/rubik-cyrillic-500-normal.woff2) format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:'Rubik';font-style:normal;font-weight:500;font-display:swap;src:url(fonts/rubik-latin-500-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Rubik';font-style:normal;font-weight:700;font-display:swap;src:url(fonts/rubik-cyrillic-700-normal.woff2) format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:'Rubik';font-style:normal;font-weight:700;font-display:swap;src:url(fonts/rubik-latin-700-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Rubik';font-style:normal;font-weight:800;font-display:swap;src:url(fonts/rubik-cyrillic-800-normal.woff2) format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:'Rubik';font-style:normal;font-weight:800;font-display:swap;src:url(fonts/rubik-latin-800-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Inter';font-style:normal;font-weight:400;font-display:swap;src:url(fonts/inter-cyrillic-400-normal.woff2) format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:'Inter';font-style:normal;font-weight:400;font-display:swap;src:url(fonts/inter-latin-400-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Inter';font-style:normal;font-weight:500;font-display:swap;src:url(fonts/inter-cyrillic-500-normal.woff2) format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:'Inter';font-style:normal;font-weight:500;font-display:swap;src:url(fonts/inter-latin-500-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Inter';font-style:normal;font-weight:600;font-display:swap;src:url(fonts/inter-cyrillic-600-normal.woff2) format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:'Inter';font-style:normal;font-weight:600;font-display:swap;src:url(fonts/inter-latin-600-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+:root{--font-head:'Rubik',system-ui,sans-serif;--font-body:'Inter',system-ui,sans-serif}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{margin:0;height:100%}
 body{min-height:100dvh;background:var(--bg);color:var(--text);font-family:var(--font-body);overflow-x:hidden;-webkit-font-smoothing:antialiased}
@@ -68,28 +72,34 @@ button:disabled{cursor:default}
   .bulb{animation:none}
 }
 @media (max-height:640px){.wheel-box{width:min(80vw,58dvh)}.splash .wheel-box{width:min(50vw,170px)}}
-/* A: Неон-казино */
-.v-neon{background:radial-gradient(ellipse at 50% 30%,var(--bg2),var(--bg) 70%)}
-.v-neon .bg{background:radial-gradient(circle at 15% 85%,rgba(25,230,212,.18),transparent 40%),radial-gradient(circle at 90% 10%,rgba(255,61,154,.22),transparent 45%)}
-.v-neon .head h1{font-weight:700;font-size:15px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent2);text-shadow:0 0 12px rgba(25,230,212,.7)}
-.v-neon .splash{background:radial-gradient(ellipse at 50% 35%,var(--bg2),var(--bg) 72%)}
-.v-neon .splash h1{font-weight:700;text-shadow:0 0 6px #fff,0 0 22px var(--accent),0 0 42px var(--accent)}
-.v-neon .kicker{color:var(--accent2);text-shadow:0 0 10px var(--accent2)}
-.v-neon .rim{fill:#0d041f;stroke:var(--gold);stroke-width:1.2;filter:drop-shadow(0 0 4px var(--gold))}
-.v-neon .rim-in{fill:none;stroke:var(--accent);stroke-width:.8}
-.v-neon .bulb{fill:var(--gold);filter:drop-shadow(0 0 2px var(--gold))}
-.v-neon .hub{fill:#0d041f;stroke:var(--accent2);stroke-width:1.4;filter:drop-shadow(0 0 4px var(--accent2))}
-.v-neon .hub-in{fill:var(--accent)}
-.v-neon .sec{stroke-width:.9;stroke:var(--accent)}
-.v-neon .lbl{fill:#ffe9fb;font-size:4.8px}
-.v-neon .w-rot{filter:drop-shadow(0 0 10px rgba(255,61,154,.45))}
-.v-neon .ic{stroke-width:1.5}
-.v-neon .pointer svg{filter:drop-shadow(0 0 6px var(--gold))}
-.v-neon .btn-main,.v-neon .btn-primary{background:linear-gradient(135deg,var(--accent),#b01fff);color:#fff;border-radius:999px;box-shadow:0 0 0 2px rgba(255,255,255,.25) inset,0 0 22px rgba(255,61,154,.65),0 6px 24px rgba(0,0,0,.4);text-shadow:0 0 8px rgba(255,255,255,.7)}
-.v-neon .btn-main:disabled{filter:saturate(.6)}
-.v-neon .btn-sec{border:1.5px solid var(--accent2);color:var(--accent2);border-radius:999px;box-shadow:0 0 12px rgba(25,230,212,.35),inset 0 0 10px rgba(25,230,212,.15)}
-.v-neon .card{background:linear-gradient(180deg,#2a1156,#170830);border:1.5px solid var(--accent);border-bottom:0;border-radius:28px 28px 0 0;box-shadow:0 -10px 50px rgba(255,61,154,.35)}
-.v-neon .card-ic{border-radius:50%;background:#14072b;border:2px solid var(--gold);color:var(--accent2);box-shadow:0 0 24px rgba(255,200,61,.55)}
-.v-neon .card-ic .ic{filter:drop-shadow(0 0 4px currentColor)}
-.v-neon .card h2{font-weight:700;font-size:22px;text-shadow:0 0 14px var(--accent)}
-.v-neon .flash{background:radial-gradient(circle at 50% 45%,rgba(255,255,255,.85),rgba(255,61,154,.5) 35%,transparent 70%)}
+/* C: Яркий поп */
+.v-pop{background:var(--bg)}
+.v-pop .bg{background:radial-gradient(circle at 8% 12%,#ffc533 0 70px,transparent 71px),radial-gradient(circle at 96% 30%,#5fd6b0 0 56px,transparent 57px),radial-gradient(circle at 12% 92%,#ff6b5a 0 64px,transparent 65px);opacity:.55}
+.v-pop .head h1{font-weight:800;font-size:20px;letter-spacing:-.01em}
+.v-pop .splash{background:var(--bg)}
+.v-pop .splash h1{font-weight:800;letter-spacing:-.02em;color:var(--ink);text-shadow:3px 3px 0 var(--gold)}
+.v-pop .kicker{font-weight:600;color:var(--ink);background:var(--accent2);border:2px solid var(--ink);padding:4px 12px;border-radius:999px;letter-spacing:.14em}
+.v-pop .splash p.sub{color:var(--ink);font-weight:500}
+.v-pop .rim{fill:#fff;stroke:var(--ink);stroke-width:2.4}
+.v-pop .rim-in{fill:none;stroke:var(--ink);stroke-width:1.6}
+.v-pop .bulb{fill:var(--accent);stroke:var(--ink);stroke-width:.6;animation:none}
+.v-pop .bulb:nth-of-type(3n+1){fill:var(--gold)}
+.v-pop .bulb:nth-of-type(3n+2){fill:var(--accent2)}
+.v-pop .hub{fill:var(--gold);stroke:var(--ink);stroke-width:2.2}
+.v-pop .hub-in{fill:var(--ink)}
+.v-pop{--sec-sw:1.6}
+.v-pop .ic{fill:#fff;stroke:var(--ink);stroke-width:1.7}
+.v-pop .ic .o{fill:none}
+.v-pop .lbl{font-weight:700;font-size:5.4px;fill:var(--ink)}
+.v-pop .w-fix .rim{filter:drop-shadow(3px 4px 0 var(--ink))}
+.v-pop .btn-main,.v-pop .btn-primary{font-weight:800;background:var(--accent);color:#fff;border:3px solid var(--ink);border-radius:18px;box-shadow:4px 5px 0 var(--ink);text-shadow:1px 1px 0 var(--ink);font-size:17px}
+.v-pop .btn-main:active:not(:disabled),.v-pop .btn-primary:active{box-shadow:1px 2px 0 var(--ink);transform:translate(3px,3px)}
+.v-pop .btn-main:disabled{background:#ffb4aa}
+.v-pop .btn-sec{font-weight:700;background:var(--gold);color:var(--ink);border:3px solid var(--ink);border-radius:16px;box-shadow:3px 4px 0 var(--ink)}
+.v-pop .btn-sec:last-child{background:var(--accent2)}
+.v-pop .note{color:var(--ink);opacity:.7}
+.v-pop .card{--card-text:var(--ink);background:#fff;border:3px solid var(--ink);border-bottom:0;border-radius:30px 30px 0 0;box-shadow:0 -6px 0 var(--accent2)}
+.v-pop .card-ic{border-radius:26px;background:var(--gold);border:3px solid var(--ink);box-shadow:4px 5px 0 var(--ink);color:var(--ink);transform:rotate(-6deg)}
+.v-pop .ic-big{fill:#fff}
+.v-pop .card h2{font-weight:800;font-size:30px;color:var(--ink)}
+.v-pop .flash{display:none}
