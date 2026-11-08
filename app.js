@@ -50,13 +50,13 @@
       var fill = w.sectorFill[i % w.sectorFill.length];
       h += '<path class="sec" d="M0 0L' + f(p0[0]) + ' ' + f(p0[1]) + 'A' + R + ' ' + R + ' 0 0 1 ' + f(p1[0]) + ' ' + f(p1[1]) + 'Z" fill="' + fill + '"/>';
     });
-    cfg.sectors.forEach(function (s, i) {
+    if (w.icons === false && w.labels === false) { /* чистое колесо */ } else cfg.sectors.forEach(function (s, i) {
       var a = i * step;
       var col = w.iconColors[i % w.iconColors.length];
       var body = (window.KOLESO_ICONS || {})[s.icon] || '';
-      h += '<g transform="rotate(' + a + ') translate(0 -33) scale(0.88) translate(-12 -12)" class="ic" style="color:' + col + '"' +
+      if (w.icons !== false) h += '<g transform="rotate(' + a + ') translate(0 -33) scale(0.88) translate(-12 -12)" class="ic" style="color:' + col + '"' +
         (w.glow ? ' filter="url(#' + gid + ')"' : '') + '>' + body + '</g>';
-      h += '<text class="lbl" transform="rotate(' + a + ') translate(0 -81) rotate(-90)" text-anchor="end" dy=".35em">' + s.title + '</text>';
+      if (w.labels !== false) h += '<text class="lbl" transform="rotate(' + a + ') translate(0 -81) rotate(-90)" text-anchor="end" dy=".35em">' + s.title + '</text>';
     });
     svg.setAttribute('viewBox', '-100 -100 200 200');
     svg.innerHTML = h;
