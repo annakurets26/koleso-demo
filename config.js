@@ -8,7 +8,7 @@ window.KOLESO_CONFIG = {
   "againLabel": "Крутить ещё",
   "shareLabel": "Поделиться",
   "contactLabel": "Написать",
-  "demoNote": "Демо-прототип, версия 9. Тексты и условия задаются в config.json.",
+  "demoNote": "Демо-прототип, версия 10. Тексты и условия задаются в config.json.",
   "spin": {
     "duration": 2800,
     "minTurns": 3
@@ -213,9 +213,9 @@ window.KOLESO_CONFIG = {
   "wheel": {
     "sectorFill": [
       "#b9a9e3",
-      "#e3dcf5",
-      "#cdbfee",
-      "#f0ebfa"
+      "#f0c8c8",
+      "#d6cbf2",
+      "#f2dfc4"
     ],
     "iconColors": [
       "#2e2a45"
