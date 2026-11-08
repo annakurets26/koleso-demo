@@ -109,7 +109,11 @@
       p.vy += p.g; p.vx *= .985; p.x += p.vx; p.y += p.vy; p.rot += p.vr; p.life -= p.d;
       ctx.save(); ctx.globalAlpha = Math.max(p.life, 0); ctx.translate(p.x, p.y); ctx.rotate(p.rot); ctx.fillStyle = p.c;
       if (cfg.effect.shape === 'circle') { ctx.beginPath(); ctx.arc(0, 0, p.s / 2, 0, 6.3); ctx.fill(); }
-      else if (cfg.effect.shape === 'star') {
+      else if (cfg.effect.shape === 'heart') {
+        var s = p.s; ctx.beginPath(); ctx.moveTo(0, s * .35);
+        ctx.bezierCurveTo(-s * 1.1, -s * .3, -s * .5, -s * 1.0, 0, -s * .35);
+        ctx.bezierCurveTo(s * .5, -s * 1.0, s * 1.1, -s * .3, 0, s * .35); ctx.fill();
+      } else if (cfg.effect.shape === 'star') {
         ctx.beginPath(); ctx.moveTo(0, -p.s); ctx.lineTo(p.s * .3, -p.s * .3); ctx.lineTo(p.s, 0); ctx.lineTo(p.s * .3, p.s * .3);
         ctx.lineTo(0, p.s); ctx.lineTo(-p.s * .3, p.s * .3); ctx.lineTo(-p.s, 0); ctx.lineTo(-p.s * .3, -p.s * .3); ctx.closePath(); ctx.fill();
       } else ctx.fillRect(-p.s / 2, -p.s / 3, p.s, p.s * .6);
@@ -137,6 +141,14 @@
     try { if (tg && tg.HapticFeedback) kind === 'done' ? tg.HapticFeedback.notificationOccurred('success') : tg.HapticFeedback.impactOccurred('light'); } catch (e) {}
   }
 
+  var tickEl = null;
+  function tickSector(idx) {
+    if (!cfg.anim || !cfg.anim.tick || reduceMq.matches) return;
+    if (tickEl) tickEl.classList.remove('tick');
+    tickEl = rotEl.querySelector('.sec[data-i="' + (((idx % n) + n) % n) + '"]');
+    if (tickEl) tickEl.classList.add('tick');
+  }
+
   function spin() {
     if (spinning) return;
     spinning = true; closeCard(); closePanel(); setWinner(-1);
@@ -156,7 +168,7 @@
     (function tick() {
       if (!spinning) return;
       var a = curAngle(), v = (((-a) % 360) + 360) % 360, idx = Math.floor((v + step / 2) / step);
-      if (lastIdx !== -1 && idx !== lastIdx) { kick(false); haptic('tick'); }
+      if (lastIdx !== -1 && idx !== lastIdx) { kick(false); haptic('tick'); tickSector(idx); }
       lastIdx = idx;
       if (performance.now() - t0 < dur + 80) requestAnimationFrame(tick);
     })();
@@ -165,6 +177,7 @@
 
   function finish(k) {
     spinning = false; lastResult = k;
+    if (tickEl) { tickEl.classList.remove('tick'); tickEl = null; }
     document.body.classList.remove('is-spinning');
     $('#spinBtn').disabled = false;
     kick(true); haptic('done'); bumpCounter(); setWinner(k);
@@ -361,6 +374,18 @@
     openLink('https://t.me/share/url?url=' + encodeURIComponent(l.share) + '&text=' + encodeURIComponent(text));
   }
 
+  function ambient() {
+    if (!cfg.anim || cfg.anim.ambient !== 'hearts' || reduceMq.matches) return;
+    var bg = $('.bg'), cols = cfg.wheel.sectorFill;
+    for (var i = 0; i < 14; i++) {
+      var d = document.createElement('i'); d.className = 'float';
+      var sz = 14 + r01() * 22;
+      d.style.cssText = 'left:' + f(r01() * 96) + '%;width:' + f(sz) + 'px;height:' + f(sz) + 'px;animation-duration:' + f(9 + r01() * 9) + 's;animation-delay:' + f(-r01() * 14) + 's;color:' + cols[i % cols.length];
+      d.innerHTML = '<svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 21S3 15.2 3 8.8A4.8 4.8 0 0 1 12 6.4a4.8 4.8 0 0 1 9 2.4C21 15.2 12 21 12 21z"/></svg>';
+      bg.appendChild(d);
+    }
+  }
+
   function init() {
     n = cfg.sectors.length; step = 360 / n;
     applyColors(cfg.colors);
@@ -406,6 +431,7 @@
     $('#sheetBg').addEventListener('click', closeCard);
     addEventListener('keydown', function (e) { if (e.key === 'Escape') { closeCard(); closePanel(); } });
     if (tg) { try { tg.ready(); tg.expand(); tg.setHeaderColor(cfg.colors.bg); tg.setBackgroundColor(cfg.colors.bg); } catch (e) {} }
+    ambient();
     document.body.classList.add('ready');
   }
 
