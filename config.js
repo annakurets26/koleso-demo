@@ -7,7 +7,7 @@ window.KOLESO_CONFIG = {
   "againLabel": "Крутить ещё",
   "shareLabel": "Поделиться",
   "contactLabel": "Написать",
-  "demoNote": "Игра для двоих. Версия 14.",
+  "demoNote": "Игра для двоих. Версия 15.",
   "spin": {
     "duration": 2800,
     "minTurns": 3
