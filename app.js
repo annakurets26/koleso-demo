@@ -17,7 +17,7 @@
 
   function loadConfig() {
     if (location.protocol === 'file:' && window.KOLESO_CONFIG) return Promise.resolve(window.KOLESO_CONFIG);
-    return fetch('config.json', { cache: 'no-cache' }).then(function (r) {
+    return fetch('config.json?v=3', { cache: 'no-cache' }).then(function (r) {
       if (!r.ok) throw new Error('config');
       return r.json();
     }).catch(function (e) {
