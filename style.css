@@ -109,3 +109,26 @@ button:disabled{cursor:default}
 .v-lav .lbl{font-size:7.4px;font-weight:700;fill:#1f1b33;stroke:#fff;stroke-width:1.8px;paint-order:stroke;stroke-linejoin:round}
 .v-lav .done .lbl.win{fill:#fff;stroke:#4b3f72}
 .v-lav .card-row .btn{font-size:13px;padding:11px 4px}
+
+/* экран с полезным */
+.card.panel{text-align:left;max-height:86dvh;overflow:auto;padding-top:22px}
+.card.panel h2{font-size:22px;margin-bottom:6px;text-align:left}
+.p-intro{margin:0 0 14px!important;font-size:14px!important;color:#4f4a6a!important;max-width:none!important}
+.card.panel .card-btns{margin-top:16px}
+.p-check{display:flex;gap:12px;align-items:flex-start;width:100%;text-align:left;padding:11px 12px;margin-bottom:8px;border:1.5px solid #cdbfee;border-radius:12px;background:#faf8fe;color:#2e2a45;font-size:15px;line-height:1.4;font-weight:500}
+.p-box{flex:none;width:22px;height:22px;border:2px solid #4b3f72;border-radius:6px;background:#fff;display:grid;place-items:center;margin-top:1px}
+.p-check.on{background:#ece6fa;border-color:#8c7bc4}
+.p-check.on .p-box{background:#4b3f72}
+.p-check.on .p-box::after{content:"";width:6px;height:11px;border:solid #fff;border-width:0 2.5px 2.5px 0;transform:rotate(45deg) translate(-1px,-1px)}
+.p-prog{margin:6px 0 4px!important;font-size:13px!important;font-weight:700;color:#8c7bc4!important;max-width:none!important}
+.p-note{margin:10px 0 0!important;font-size:14px!important;color:#2e2a45!important;max-width:none!important}
+.p-item{display:flex;flex-direction:column;gap:2px;padding:11px 12px;margin-bottom:8px;border-radius:12px;background:#f3effb;font-size:15px;line-height:1.4;color:#2e2a45}
+.p-item strong{font-weight:700}
+.p-steps{margin:0 0 12px;padding-left:22px;font-size:15px;line-height:1.5;color:#2e2a45}
+.p-timer{font:700 40px/1.2 var(--font-head);color:#4b3f72;text-align:center;margin:6px 0 10px}
+.p-start{width:100%;padding:12px}
+.p-q{margin:2px 0 10px!important;font-size:16px!important;font-weight:700;max-width:none!important}
+.p-opt{display:block;width:100%;text-align:left;padding:12px;margin-bottom:8px;border:1.5px solid #4b3f72;border-radius:12px;background:#fff;color:#2e2a45;font-size:15px;font-weight:500}
+.p-opt.right{background:#dcefe3;border-color:#3f8a5f}
+.p-opt.wrong{background:#f6dcdc;border-color:#b24a4a}
+.p-quiz .btn-sec{width:100%;margin-top:10px;padding:12px}

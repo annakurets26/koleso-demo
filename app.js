@@ -17,7 +17,7 @@
 
   function loadConfig() {
     if (location.protocol === 'file:' && window.KOLESO_CONFIG) return Promise.resolve(window.KOLESO_CONFIG);
-    return fetch('config.json?v=6', { cache: 'no-cache' }).then(function (r) {
+    return fetch('config.json?v=7', { cache: 'no-cache' }).then(function (r) {
       if (!r.ok) throw new Error('config');
       return r.json();
     }).catch(function (e) {
@@ -139,7 +139,7 @@
 
   function spin() {
     if (spinning) return;
-    spinning = true; closeCard(); setWinner(-1);
+    spinning = true; closeCard(); closePanel(); setWinner(-1);
     document.body.classList.add('is-spinning');
     $('#spinBtn').disabled = true;
     var k = rint(n), jitter = (r01() - .5) * step * .7;
@@ -191,6 +191,91 @@
       nm.classList.remove('show'); void nm.offsetWidth; nm.classList.add('show');
     } else { nm.textContent = ''; nm.classList.remove('show'); }
   }
+
+  /* ---------- экран с полезным ---------- */
+  var timerId = 0;
+  function h(tag, cls, text) { var e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
+
+  function rCheck(body, p) {
+    var prog = h('p', 'p-prog'), n = p.items.length, done = 0;
+    function upd() { prog.textContent = 'Отмечено ' + done + ' из ' + n; }
+    p.items.forEach(function (t) {
+      var b = h('button', 'p-check'); b.type = 'button'; b.setAttribute('role', 'checkbox'); b.setAttribute('aria-checked', 'false');
+      b.appendChild(h('span', 'p-box')); b.appendChild(h('span', 'p-txt', t));
+      b.addEventListener('click', function () {
+        var on = b.getAttribute('aria-checked') !== 'true';
+        b.setAttribute('aria-checked', on); b.classList.toggle('on', on); done += on ? 1 : -1; upd();
+      });
+      body.appendChild(b);
+    });
+    upd(); body.appendChild(prog);
+    if (p.outro) body.appendChild(h('p', 'p-note', p.outro));
+  }
+
+  function rInfo(body, p) {
+    p.items.forEach(function (it) {
+      var d = h('div', 'p-item'); d.appendChild(h('strong', '', it.title)); d.appendChild(h('span', '', it.text)); body.appendChild(d);
+    });
+  }
+
+  function rTask(body, p) {
+    var ol = h('ol', 'p-steps'); p.steps.forEach(function (s) { ol.appendChild(h('li', '', s)); }); body.appendChild(ol);
+    var t = h('div', 'p-timer'), btn = h('button', 'btn btn-sec p-start', 'Запустить таймер'), msg = h('p', 'p-note');
+    btn.type = 'button';
+    function fmt(s) { return Math.floor(s / 60) + ':' + ('0' + (s % 60)).slice(-2); }
+    t.textContent = fmt(p.seconds);
+    btn.addEventListener('click', function () {
+      clearInterval(timerId); var left = p.seconds; msg.textContent = ''; t.textContent = fmt(left); btn.textContent = 'Начать заново';
+      timerId = setInterval(function () {
+        left -= 1; t.textContent = fmt(Math.max(left, 0));
+        if (left <= 0) { clearInterval(timerId); msg.textContent = p.done; }
+      }, 1000);
+    });
+    body.appendChild(t); body.appendChild(btn); body.appendChild(msg);
+  }
+
+  function rQuiz(body, p) {
+    var i = 0, score = 0, box = h('div', 'p-quiz'); body.appendChild(box);
+    function show() {
+      box.innerHTML = '';
+      if (i >= p.questions.length) {
+        box.appendChild(h('p', 'p-q', 'Верных ответов: ' + score + ' из ' + p.questions.length + '.'));
+        if (p.outro) box.appendChild(h('p', 'p-note', p.outro));
+        return;
+      }
+      var q = p.questions[i];
+      box.appendChild(h('p', 'p-prog', 'Вопрос ' + (i + 1) + ' из ' + p.questions.length));
+      box.appendChild(h('p', 'p-q', q.q));
+      var btns = [], exp = h('p', 'p-note'), next = h('button', 'btn btn-sec', i + 1 < p.questions.length ? 'Дальше' : 'Показать результат');
+      next.type = 'button'; next.hidden = true;
+      q.options.forEach(function (o, k) {
+        var b = h('button', 'p-opt', o); b.type = 'button'; btns.push(b);
+        b.addEventListener('click', function () {
+          btns.forEach(function (x, j) { x.disabled = true; if (j === q.answer) x.classList.add('right'); });
+          if (k === q.answer) score += 1; else b.classList.add('wrong');
+          exp.textContent = q.explain; next.hidden = false;
+        });
+        box.appendChild(b);
+      });
+      box.appendChild(exp); box.appendChild(next);
+      next.addEventListener('click', function () { i += 1; show(); });
+    }
+    show();
+  }
+
+  function openPanel(k) {
+    var p = cfg.sectors[k].panel; if (!p) return;
+    clearInterval(timerId);
+    $('#panelTitle').textContent = p.title; $('#panelIntro').textContent = p.intro || '';
+    var body = $('#panelBody'); body.innerHTML = '';
+    ({ checklist: rCheck, info: rInfo, task: rTask, quiz: rQuiz }[p.type] || rInfo)(body, p);
+    var lk = $('#panelLink');
+    if (p.link) { lk.hidden = false; lk.textContent = p.link.label; lk.dataset.type = p.link.type; lk.dataset.url = p.link.url || ''; } else lk.hidden = true;
+    closeCard();
+    var sh = $('#panel'); sh.hidden = false; void sh.offsetWidth; sh.classList.add('open');
+    $('#panelScroll').scrollTop = 0;
+  }
+  function closePanel() { clearInterval(timerId); var sh = $('#panel'); sh.classList.remove('open'); sh.hidden = true; }
 
   function closeCard() {
     var card = $('#sheet'); card.classList.remove('open'); card.hidden = true;
@@ -256,16 +341,24 @@
     $('#againBtn').addEventListener('click', function () { closeCard(); spin(); });
     $('#actionBtn').addEventListener('click', function () {
       var t = this.dataset.type, u = this.dataset.url;
-      if (t === 'spin') { closeCard(); spin(); }
+      if (t === 'panel') openPanel(lastResult);
+      else if (t === 'spin') { closeCard(); spin(); }
       else if (t === 'share') share();
       else if (u) openLink(u);
       else if (t === 'channel') openLink(cfg.links.channel);
       else openLink(contactUrl());
     });
     $('#shareBtn').addEventListener('click', share);
+    $('#panelBack').addEventListener('click', closePanel);
+    $('#panelBg').addEventListener('click', closePanel);
+    $('#panelAgain').addEventListener('click', function () { closePanel(); spin(); });
+    $('#panelLink').addEventListener('click', function () {
+      var t = this.dataset.type, u = this.dataset.url;
+      if (u) openLink(u); else if (t === 'channel') openLink(cfg.links.channel); else openLink(contactUrl());
+    });
     $('#contactBtn').addEventListener('click', function () { openLink(contactUrl()); });
     $('#sheetBg').addEventListener('click', closeCard);
-    addEventListener('keydown', function (e) { if (e.key === 'Escape') closeCard(); });
+    addEventListener('keydown', function (e) { if (e.key === 'Escape') { closeCard(); closePanel(); } });
     if (tg) { try { tg.ready(); tg.expand(); tg.setHeaderColor(cfg.colors.bg); tg.setBackgroundColor(cfg.colors.bg); } catch (e) {} }
     document.body.classList.add('ready');
   }
