@@ -17,7 +17,7 @@
 
   function loadConfig() {
     if (location.protocol === 'file:' && window.KOLESO_CONFIG) return Promise.resolve(window.KOLESO_CONFIG);
-    return fetch('config.json?v=5', { cache: 'no-cache' }).then(function (r) {
+    return fetch('config.json?v=6', { cache: 'no-cache' }).then(function (r) {
       if (!r.ok) throw new Error('config');
       return r.json();
     }).catch(function (e) {
@@ -173,9 +173,11 @@
     $('#cardIcon').innerHTML = iconSvg(s.icon, 'ic ic-big');
     $('#cardTitle').textContent = s.title;
     $('#cardText').textContent = txt;
+    var act = s.action || { label: cfg.againLabel, type: 'spin' };
+    var ab = $('#actionBtn'); ab.textContent = act.label; ab.dataset.type = act.type; ab.dataset.url = act.url || '';
     var card = $('#sheet'); card.hidden = false; void card.offsetWidth; card.classList.add('open');
     if (!reduceMq.matches) burst(); else { /* без эффектов */ }
-    setTimeout(function () { $('#againBtn').focus({ preventScroll: true }); }, 50);
+    setTimeout(function () { $('#actionBtn').focus({ preventScroll: true }); }, 50);
   }
 
   function setWinner(k) {
@@ -252,6 +254,14 @@
     });
     $('#spinBtn').addEventListener('click', spin);
     $('#againBtn').addEventListener('click', function () { closeCard(); spin(); });
+    $('#actionBtn').addEventListener('click', function () {
+      var t = this.dataset.type, u = this.dataset.url;
+      if (t === 'spin') { closeCard(); spin(); }
+      else if (t === 'share') share();
+      else if (u) openLink(u);
+      else if (t === 'channel') openLink(cfg.links.channel);
+      else openLink(contactUrl());
+    });
     $('#shareBtn').addEventListener('click', share);
     $('#contactBtn').addEventListener('click', function () { openLink(contactUrl()); });
     $('#sheetBg').addEventListener('click', closeCard);
