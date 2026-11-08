@@ -17,7 +17,7 @@
 
   function loadConfig() {
     if (location.protocol === 'file:' && window.KOLESO_CONFIG) return Promise.resolve(window.KOLESO_CONFIG);
-    return fetch('config.json?v=4', { cache: 'no-cache' }).then(function (r) {
+    return fetch('config.json?v=5', { cache: 'no-cache' }).then(function (r) {
       if (!r.ok) throw new Error('config');
       return r.json();
     }).catch(function (e) {
@@ -48,7 +48,7 @@
       var a0 = i * step - step / 2, a1 = a0 + step;
       var p0 = pt(a0, R), p1 = pt(a1, R);
       var fill = w.sectorFill[i % w.sectorFill.length];
-      h += '<path class="sec" d="M0 0L' + f(p0[0]) + ' ' + f(p0[1]) + 'A' + R + ' ' + R + ' 0 0 1 ' + f(p1[0]) + ' ' + f(p1[1]) + 'Z" fill="' + fill + '"/>';
+      h += '<path class="sec" data-i="' + i + '" d="M0 0L' + f(p0[0]) + ' ' + f(p0[1]) + 'A' + R + ' ' + R + ' 0 0 1 ' + f(p1[0]) + ' ' + f(p1[1]) + 'Z" fill="' + fill + '"/>';
     });
     if (w.icons === false && w.labels === false) { /* чистое колесо */ } else cfg.sectors.forEach(function (s, i) {
       var a = i * step;
@@ -56,7 +56,7 @@
       var body = (window.KOLESO_ICONS || {})[s.icon] || '';
       if (w.icons !== false) h += '<g transform="rotate(' + a + ') translate(0 -33) scale(0.88) translate(-12 -12)" class="ic" style="color:' + col + '"' +
         (w.glow ? ' filter="url(#' + gid + ')"' : '') + '>' + body + '</g>';
-      if (w.labels !== false) h += '<text class="lbl" transform="rotate(' + a + ') translate(0 -81) rotate(-90)" text-anchor="end" dy=".35em">' + s.title + '</text>';
+      if (w.labels !== false) h += '<text class="lbl" data-i="' + i + '" transform="rotate(' + a + ') translate(0 -81) rotate(-90)" text-anchor="end" dy=".35em">' + s.title + '</text>';
     });
     svg.setAttribute('viewBox', '-100 -100 200 200');
     svg.innerHTML = h;
@@ -139,7 +139,7 @@
 
   function spin() {
     if (spinning) return;
-    spinning = true; closeCard();
+    spinning = true; closeCard(); setWinner(-1);
     document.body.classList.add('is-spinning');
     $('#spinBtn').disabled = true;
     var k = rint(n), jitter = (r01() - .5) * step * .7;
@@ -167,7 +167,7 @@
     spinning = false; lastResult = k;
     document.body.classList.remove('is-spinning');
     $('#spinBtn').disabled = false;
-    kick(true); haptic('done'); bumpCounter();
+    kick(true); haptic('done'); bumpCounter(); setWinner(k);
     var s = cfg.sectors[k];
     var txt = s.texts[rint(s.texts.length)];
     $('#cardIcon').innerHTML = iconSvg(s.icon, 'ic ic-big');
@@ -176,6 +176,18 @@
     var card = $('#sheet'); card.hidden = false; void card.offsetWidth; card.classList.add('open');
     if (!reduceMq.matches) burst(); else { /* без эффектов */ }
     setTimeout(function () { $('#againBtn').focus({ preventScroll: true }); }, 50);
+  }
+
+  function setWinner(k) {
+    var box = $('#wheelMain'), nm = $('#resultName');
+    box.classList.toggle('done', k >= 0);
+    box.querySelectorAll('.w-rot .sec, .w-rot .lbl').forEach(function (el) {
+      el.classList.toggle('win', +el.getAttribute('data-i') === k);
+    });
+    if (k >= 0) {
+      nm.textContent = cfg.sectors[k].title;
+      nm.classList.remove('show'); void nm.offsetWidth; nm.classList.add('show');
+    } else { nm.textContent = ''; nm.classList.remove('show'); }
   }
 
   function closeCard() {

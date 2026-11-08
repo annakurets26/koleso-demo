@@ -120,7 +120,7 @@ window.KOLESO_CONFIG = {
     "glow": false,
     "bulbs": 0,
     "icons": false,
-    "labels": false
+    "labels": true
   },
   "effect": {
     "type": "confetti",
