@@ -132,3 +132,13 @@ button:disabled{cursor:default}
 .p-opt.right{background:#dcefe3;border-color:#3f8a5f}
 .p-opt.wrong{background:#f6dcdc;border-color:#b24a4a}
 .p-quiz .btn-sec{width:100%;margin-top:10px;padding:12px}
+
+/* крупные подписи на колесе и игровые экраны */
+.v-lav .lbl{font-size:9px;font-weight:800;fill:#14102a;stroke:#fff;stroke-width:2.4px;paint-order:stroke;stroke-linejoin:round}
+.v-lav .done .lbl.win{fill:#fff;stroke:#2e2556;stroke-width:2.4px}
+.p-big{margin:6px 0 12px;padding:18px 16px;border-radius:16px;background:#ece6fa;color:#2e2a45;font:700 20px/1.35 var(--font-head);text-align:center;min-height:96px;display:grid;place-items:center}
+.p-big.pop{animation:nameIn .45s cubic-bezier(.2,1.3,.3,1)}
+.p-nums{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin:6px 0 12px}
+.p-num{padding:16px 0;border:2px solid #4b3f72;border-radius:14px;background:#fff;color:#2e2a45;font:700 22px var(--font-head)}
+.p-num.right{background:#dcefe3;border-color:#3f8a5f}
+.p-num.wrong{background:#f6dcdc;border-color:#b24a4a}

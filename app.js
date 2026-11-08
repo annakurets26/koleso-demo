@@ -17,7 +17,7 @@
 
   function loadConfig() {
     if (location.protocol === 'file:' && window.KOLESO_CONFIG) return Promise.resolve(window.KOLESO_CONFIG);
-    return fetch('config.json?v=7', { cache: 'no-cache' }).then(function (r) {
+    return fetch('config.json?v=8', { cache: 'no-cache' }).then(function (r) {
       if (!r.ok) throw new Error('config');
       return r.json();
     }).catch(function (e) {
@@ -263,12 +263,58 @@
     show();
   }
 
+  function startTimer(body, seconds, doneText) {
+    var t = h('div', 'p-timer'), btn = h('button', 'btn btn-sec p-start', 'Запустить таймер'), msg = h('p', 'p-note');
+    btn.type = 'button';
+    function fmt(s) { return Math.floor(s / 60) + ':' + ('0' + (s % 60)).slice(-2); }
+    t.textContent = fmt(seconds);
+    btn.addEventListener('click', function () {
+      clearInterval(timerId); var left = seconds; msg.textContent = ''; t.textContent = fmt(left); btn.textContent = 'Начать заново';
+      timerId = setInterval(function () {
+        left -= 1; t.textContent = fmt(Math.max(left, 0));
+        if (left <= 0) { clearInterval(timerId); msg.textContent = doneText || ''; }
+      }, 1000);
+    });
+    body.appendChild(t); body.appendChild(btn); body.appendChild(msg);
+  }
+
+  function rRandom(body, p) {
+    var last = -1, box = h('div', 'p-big'), btn = h('button', 'btn btn-sec p-start', p.again || 'Ещё');
+    btn.type = 'button';
+    function pick() {
+      var i; do { i = rint(p.items.length); } while (i === last && p.items.length > 1);
+      last = i; box.textContent = p.items[i]; box.classList.remove('pop'); void box.offsetWidth; box.classList.add('pop');
+    }
+    btn.addEventListener('click', pick);
+    body.appendChild(box); body.appendChild(btn); pick();
+    if (p.seconds) startTimer(body, p.seconds, p.done);
+  }
+
+  function rGuess(body, p) {
+    var box = h('div', 'p-quiz'); body.appendChild(box);
+    function round() {
+      box.innerHTML = ''; var secret = 1 + rint(p.max), row = h('div', 'p-nums'), msg = h('p', 'p-big');
+      for (var n = 1; n <= p.max; n++) (function (n) {
+        var b = h('button', 'p-num', String(n)); b.type = 'button';
+        b.addEventListener('click', function () {
+          Array.prototype.forEach.call(row.children, function (x) { x.disabled = true; if (+x.textContent === secret) x.classList.add('right'); });
+          if (n !== secret) b.classList.add('wrong');
+          msg.textContent = n === secret ? p.win : p.lose + ' ' + secret + '.'; msg.classList.add('pop');
+          var again = h('button', 'btn btn-sec p-start', p.again || 'Ещё'); again.type = 'button'; again.addEventListener('click', round); box.appendChild(again);
+        });
+        row.appendChild(b);
+      })(n);
+      box.appendChild(row); box.appendChild(msg);
+    }
+    round();
+  }
+
   function openPanel(k) {
     var p = cfg.sectors[k].panel; if (!p) return;
     clearInterval(timerId);
     $('#panelTitle').textContent = p.title; $('#panelIntro').textContent = p.intro || '';
     var body = $('#panelBody'); body.innerHTML = '';
-    ({ checklist: rCheck, info: rInfo, task: rTask, quiz: rQuiz }[p.type] || rInfo)(body, p);
+    ({ checklist: rCheck, info: rInfo, task: rTask, quiz: rQuiz, random: rRandom, guess: rGuess }[p.type] || rInfo)(body, p);
     var lk = $('#panelLink');
     if (p.link) { lk.hidden = false; lk.textContent = p.link.label; lk.dataset.type = p.link.type; lk.dataset.url = p.link.url || ''; } else lk.hidden = true;
     closeCard();
