@@ -8,7 +8,7 @@ window.KOLESO_CONFIG = {
   "againLabel": "Крутить ещё",
   "shareLabel": "Поделиться",
   "contactLabel": "Написать",
-  "demoNote": "Демо-прототип. Тексты и условия задаются в config.json.",
+  "demoNote": "Демо-прототип, версия 9. Тексты и условия задаются в config.json.",
   "spin": {
     "duration": 2800,
     "minTurns": 3
