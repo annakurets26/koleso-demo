@@ -323,12 +323,105 @@
     round();
   }
 
+  function rPairGuess(body, p) {
+    var max = p.max || 10, tries = p.tries || 3, box = h('div', 'p-quiz'); body.appendChild(box);
+    function setup() {
+      box.innerHTML = '';
+      box.appendChild(h('p', 'p-q', 'Первый игрок: загадайте число от 1 до ' + max + ' и введите его. Второй игрок, не подглядывайте.'));
+      var inp = document.createElement('input'); inp.type = 'password'; inp.inputMode = 'numeric'; inp.maxLength = 2; inp.className = 'p-input'; inp.setAttribute('aria-label', 'Загаданное число');
+      var go = h('button', 'btn btn-sec p-start', 'Спрятать и передать телефон'), err = h('p', 'p-note'); go.type = 'button';
+      go.addEventListener('click', function () {
+        var v = parseInt(inp.value, 10);
+        if (!(v >= 1 && v <= max)) { err.textContent = 'Введите число от 1 до ' + max + '.'; return; }
+        inp.value = ''; guess(v, tries);
+      });
+      box.appendChild(inp); box.appendChild(go); box.appendChild(err);
+    }
+    function guess(secret, left) {
+      box.innerHTML = '';
+      box.appendChild(h('p', 'p-q', 'Второй игрок, угадывайте. Попыток: ' + left));
+      var row = h('div', 'p-nums'), msg = h('p', 'p-big');
+      for (var n = 1; n <= max; n++) (function (n) {
+        var b = h('button', 'p-num', String(n)); b.type = 'button';
+        b.addEventListener('click', function () {
+          if (n === secret) { end(secret, true); return; }
+          left -= 1; b.disabled = true; b.classList.add('wrong');
+          if (left <= 0) { end(secret, false); return; }
+          msg.textContent = (n < secret ? 'Загаданное число больше. ' : 'Загаданное число меньше. ') + 'Попыток: ' + left; msg.classList.remove('pop'); void msg.offsetWidth; msg.classList.add('pop');
+        });
+        row.appendChild(b);
+      })(n);
+      box.appendChild(row); box.appendChild(msg);
+    }
+    function end(secret, ok) {
+      box.innerHTML = '';
+      var m = h('p', 'p-big pop', ok ? 'Угадали! Число ' + secret + '.' : 'Не угадали. Было число ' + secret + '.');
+      var again = h('button', 'btn btn-sec p-start', 'Сыграть ещё'); again.type = 'button'; again.addEventListener('click', setup);
+      box.appendChild(m); box.appendChild(again);
+    }
+    setup();
+  }
+
+  function rDice(body, p) {
+    var row = h('div', 'p-dice'), a = h('div', 'p-die', '?'), b = h('div', 'p-die', '?'), msg = h('p', 'p-big');
+    var btn = h('button', 'btn btn-sec p-start', 'Бросить кубики'); btn.type = 'button';
+    row.appendChild(a); row.appendChild(b);
+    btn.addEventListener('click', function () {
+      btn.disabled = true; msg.textContent = ''; var t = 0;
+      var iv = setInterval(function () {
+        a.textContent = 1 + rint(6); b.textContent = 1 + rint(6); a.classList.add('roll'); b.classList.add('roll'); t += 1;
+        if (t > 9 || reduceMq.matches) {
+          clearInterval(iv); a.classList.remove('roll'); b.classList.remove('roll');
+          var x = 1 + rint(6), y = 1 + rint(6); a.textContent = x; b.textContent = y;
+          msg.textContent = x === y ? 'Ничья, бросайте ещё.' : (x > y ? 'Выше у первого игрока.' : 'Выше у второго игрока.');
+          msg.classList.remove('pop'); void msg.offsetWidth; msg.classList.add('pop'); btn.disabled = false;
+        }
+      }, 80);
+    });
+    body.appendChild(h('p', 'p-note', 'Первый игрок слева, второй справа.'));
+    body.appendChild(row); body.appendChild(msg); body.appendChild(btn);
+  }
+
+  function rCoin(body, p) {
+    var sides = p.sides || ['Орёл', 'Решка'], coin = h('div', 'p-coin', '?'), msg = h('p', 'p-big');
+    var btn = h('button', 'btn btn-sec p-start', 'Подбросить монетку'); btn.type = 'button';
+    btn.addEventListener('click', function () {
+      btn.disabled = true; coin.classList.remove('flip'); void coin.offsetWidth; coin.classList.add('flip'); msg.textContent = '';
+      setTimeout(function () {
+        var s = sides[rint(2)]; coin.textContent = s.charAt(0); msg.textContent = 'Выпало: ' + s + '.';
+        msg.classList.remove('pop'); void msg.offsetWidth; msg.classList.add('pop'); btn.disabled = false;
+      }, reduceMq.matches ? 50 : 700);
+    });
+    body.appendChild(coin); body.appendChild(msg); body.appendChild(btn);
+  }
+
+  function rMenu(body, p) {
+    var list = h('div', 'p-menu'); body.appendChild(list);
+    function home() {
+      list.innerHTML = '';
+      p.games.forEach(function (g) {
+        var b = h('button', 'p-opt', g.title); b.type = 'button';
+        b.addEventListener('click', function () {
+          list.innerHTML = '';
+          var back = h('button', 'btn btn-sec p-start', 'К списку игр'); back.type = 'button'; back.addEventListener('click', function () { clearInterval(timerId); home(); });
+          list.appendChild(h('p', 'p-q', g.title));
+          if (g.panel.intro) list.appendChild(h('p', 'p-note', g.panel.intro));
+          var inner = h('div'); list.appendChild(inner);
+          ({ random: rRandom, pairguess: rPairGuess, dice: rDice, coin: rCoin, guess: rGuess }[g.panel.type] || rRandom)(inner, g.panel);
+          list.appendChild(back);
+        });
+        list.appendChild(b);
+      });
+    }
+    home();
+  }
+
   function openPanel(k) {
     var p = cfg.sectors[k].panel; if (!p) return;
     clearInterval(timerId);
     $('#panelTitle').textContent = p.title; $('#panelIntro').textContent = p.intro || '';
     var body = $('#panelBody'); body.innerHTML = '';
-    ({ checklist: rCheck, info: rInfo, task: rTask, quiz: rQuiz, random: rRandom, guess: rGuess }[p.type] || rInfo)(body, p);
+    ({ checklist: rCheck, info: rInfo, task: rTask, quiz: rQuiz, random: rRandom, guess: rGuess, menu: rMenu, pairguess: rPairGuess, dice: rDice, coin: rCoin }[p.type] || rInfo)(body, p);
     var lk = $('#panelLink');
     if (p.link) { lk.hidden = false; lk.textContent = p.link.label; lk.dataset.type = p.link.type; lk.dataset.url = p.link.url || ''; } else lk.hidden = true;
     closeCard();
